@@ -15,7 +15,6 @@ export async function getNewsArticle(
     compiled = compiled.filter((each) =>
       each.title.toLowerCase().includes(search.toLowerCase())
     );
-    console.log(compiled);
   }
   compiled = compiled.slice(page * 10, page * 10 + 10);
   return compiled;

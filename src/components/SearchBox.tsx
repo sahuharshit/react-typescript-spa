@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export function SearchBox({
   counter,
+  setCounter,
   increment,
   decrement,
   setSearchBox,
@@ -22,7 +23,10 @@ export function SearchBox({
       <Search
         type="search"
         placeholder="Search For News Articles"
-        onChange={(e) => setSearchBox(e.target.value)}
+        onChange={(e) => {
+          setCounter(0);
+          setSearchBox(e.target.value);
+        }}
       />
     </>
   );
