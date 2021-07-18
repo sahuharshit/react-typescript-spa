@@ -5,5 +5,8 @@ export function useCounter() {
   const increment = () => setCounter(counter + 1);
   const decrement = () => setCounter(counter - 1);
 
+  if (counter < 0) {
+    setCounter(0);
+  }
   return { counter, increment, decrement };
 }

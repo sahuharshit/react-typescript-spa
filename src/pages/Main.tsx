@@ -8,17 +8,25 @@ import { useCounter } from "../hooks/useCounter";
 
 function MainPage() {
   const [newsArticle, setNewsArticle] = useState<NewsArticle[]>();
+  const [searchBox, setSearchBox] = useState<string>("");
   const { counter, increment, decrement } = useCounter();
 
   useEffect(() => {
-    (async () => {
-      setNewsArticle(await getNewsArticle(counter));
-    })();
-  });
+    async function getResults(counter: number, searchBox: string) {
+      const result = await getNewsArticle(counter, searchBox);
+      setNewsArticle(result);
+    }
+    getResults(counter, searchBox);
+  }, [counter, searchBox]);
 
   return (
     <>
-      <SearchBox increment={increment} decrement={decrement} />
+      <SearchBox
+        counter={counter}
+        increment={increment}
+        decrement={decrement}
+        setSearchBox={setSearchBox}
+      />
       <CardContainer>
         {newsArticle?.map((article, index) => {
           return <Card {...article} key={index} />;
